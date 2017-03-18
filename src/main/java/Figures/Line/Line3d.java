@@ -1,7 +1,7 @@
 package Figures.Line;
 
 
-import Position.Coord3d;
+import Coordinates.Coord3d;
 import org.lwjgl.opengl.GL11;
 
 public class Line3d extends Line2d {

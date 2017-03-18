@@ -1,4 +1,4 @@
-package Position;
+package Coordinates;
 
 public class Coord3d extends Coord2d {
     private float z;

@@ -2,7 +2,7 @@ package Figures.Dot;
 
 import Color.Color;
 import Interfaces.Drawable;
-import Position.Coord2d;
+import Coordinates.Coord2d;
 import org.lwjgl.opengl.GL11;
 
 

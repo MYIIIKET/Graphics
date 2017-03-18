@@ -1,7 +1,7 @@
 package Figures.Line;
 
 
-import Position.Coord2d;
+import Coordinates.Coord2d;
 import Color.Color;
 import Interfaces.Drawable;
 import org.lwjgl.opengl.*;

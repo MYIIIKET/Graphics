@@ -1,4 +1,4 @@
-package Position;
+package Coordinates;
 
 
 public class Coord2d {

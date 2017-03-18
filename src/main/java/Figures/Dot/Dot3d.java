@@ -1,6 +1,6 @@
 package Figures.Dot;
 
-import Position.Coord3d;
+import Coordinates.Coord3d;
 import org.lwjgl.opengl.GL11;
 
 public class Dot3d extends Dot2d {
