@@ -112,13 +112,9 @@ public class HelloWorld {
 
         // Run the rendering loop until the user has attempted to close
         // the window or has pressed the ESCAPE key.
-        Line3d line = new Line3d(0, 0, 0, 100, 100, 0);
-        line.setColor(1, 0, 0);
-        line.setThickness(5);
         while (!glfwWindowShouldClose(window)) {
             glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT); // clear the framebuffer
 
-            line.draw();
 
             glfwSwapBuffers(window); // swap the color buffers
 
