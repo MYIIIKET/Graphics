@@ -1,0 +1,63 @@
+package Figures.Dot;
+
+import Color.Color;
+import Interfaces.Drawable;
+import Position.Coord2d;
+import org.lwjgl.opengl.GL11;
+
+
+public class Dot2d implements Drawable {
+
+    private GL11 dot;
+    private Coord2d coord;
+    private Color color;
+
+    public Dot2d(float x, float y) {
+        coord = new Coord2d(x, y);
+        color = new Color(0, 0, 0);
+    }
+
+    public GL11 getDot() {
+        return dot;
+    }
+
+    public void setDot(GL11 dot) {
+        this.dot = dot;
+    }
+
+    public Coord2d getCoord() {
+        return coord;
+    }
+
+    public void setCoord(Coord2d position) {
+        this.coord = position;
+    }
+
+    public void setCoord(float x, float y) {
+        coord.setX(x);
+        coord.setY(y);
+    }
+
+    public Color getColor() {
+        return color;
+    }
+
+    public void setColor(Color color) {
+        this.color = color;
+    }
+
+    @Override
+    public void draw() {
+        dot.glColor3f(getColor().getRed(), getColor().getGreen(), getColor().getBlue());
+        dot.glBegin(GL11.GL_POINTS);
+        dot.glVertex2f(coord.getX(), coord.getY());
+        dot.glEnd();
+    }
+
+    @Override
+    public void setColor(float red, float green, float blue) {
+        color.setRed(red);
+        color.setGreen(green);
+        color.setBlue(blue);
+    }
+}
