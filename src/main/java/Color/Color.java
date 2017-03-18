@@ -7,9 +7,9 @@ public class Color {
     float blue;
 
     public Color(float red, float green, float blue) {
-        this.red = red;
-        this.green = green;
-        this.blue = blue;
+        setRed(red);
+        setGreen(green);
+        setBlue(blue);
     }
 
     public float getRed() {
