@@ -6,7 +6,6 @@ public class Coord2d {
     private float y;
 
     public Coord2d() {
-
     }
 
     public Coord2d(float x, float y) {

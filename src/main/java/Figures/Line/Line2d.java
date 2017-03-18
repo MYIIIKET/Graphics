@@ -1,7 +1,7 @@
 package Figures.Line;
 
 
-import Position.Position2d;
+import Position.Coord2d;
 import Color.Color;
 import Interfaces.Drawable;
 import org.lwjgl.opengl.*;
@@ -9,19 +9,28 @@ import org.lwjgl.opengl.*;
 public class Line2d implements Drawable {
     private GL11 line;
 
-    private Position2d position;
+    private Coord2d start;
+    private Coord2d end;
     private Color color;
 
+    public Line2d() {
+    }
+
     public Line2d(float xStart, float yStart, float xEnd, float yEnd) {
-        position = new Position2d(xStart, yStart, xEnd, yEnd);
+        start = new Coord2d();
+        end = new Coord2d();
+        start.setX(xStart);
+        start.setY(yStart);
+        end.setX(xEnd);
+        end.setY(yEnd);
         color = new Color(0, 0, 0);
     }
 
     @Override
     public void draw() {
         line.glBegin(GL11.GL_LINES);
-        line.glVertex2f(position.getxStart(), position.getyStart());
-        line.glVertex2f(position.getxEnd(), position.getyEnd());
+        line.glVertex2f(start.getX(), start.getY());
+        line.glVertex2f(end.getX(), end.getY());
         line.glEnd();
     }
 
@@ -34,24 +43,25 @@ public class Line2d implements Drawable {
         line.glColor3f(color.getRed(), color.getGreen(), color.getBlue());
     }
 
-    public void setPosition(float xStart, float yStart, float xEnd, float yEnd) {
-        position.setxStart(xStart);
-        position.setyStart(yStart);
-        position.setxEnd(xEnd);
-        position.setyEnd(yEnd);
-    }
-
-    public void setPosition(Position2d position) {
-        this.position = position;
-    }
-
-    public Position2d getPosition() {
-        return position;
-    }
-
     public void setColor(Color color) {
         this.color = color;
         line.glColor3f(color.getRed(), color.getGreen(), color.getBlue());
+    }
+
+    public Coord2d getStart() {
+        return start;
+    }
+
+    public void setStart(Coord2d start) {
+        this.start = start;
+    }
+
+    public Coord2d getEnd() {
+        return end;
+    }
+
+    public void setEnd(Coord2d end) {
+        this.end = end;
     }
 
     public Color getColor() {
