@@ -13,9 +13,6 @@ public class Line2d implements Drawable {
     private Coord2d end;
     private Color color;
 
-    public Line2d() {
-    }
-
     public Line2d(float xStart, float yStart, float xEnd, float yEnd) {
         start = new Coord2d();
         end = new Coord2d();

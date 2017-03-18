@@ -12,6 +12,9 @@ public class Line3d extends Line2d {
     private Coord3d end;
 
     public Line3d(float xStart, float yStart, float zStart, float xEnd, float yEnd, float zEnd) {
+        super(xStart, yStart, xEnd, yEnd);
+        start = new Coord3d();
+        end = new Coord3d();
         start.setX(xStart);
         start.setY(yStart);
         start.setZ(zStart);
