@@ -5,7 +5,7 @@ import Coordinates.Coord2d;
 import Interfaces.Drawable;
 import org.lwjgl.opengl.GL11;
 
-public class Triangle implements Drawable {
+public class Triangle2d implements Drawable {
     private GL11 triangle;
 
     private Color colorA;
@@ -16,7 +16,7 @@ public class Triangle implements Drawable {
     private Coord2d vertexB;
     private Coord2d vertexC;
 
-    public Triangle(Coord2d vertexA, Coord2d vertexB, Coord2d vertexC) {
+    public Triangle2d(Coord2d vertexA, Coord2d vertexB, Coord2d vertexC) {
         setVertexA(vertexA);
         setVertexB(vertexB);
         setVertexC(vertexC);
@@ -100,6 +100,18 @@ public class Triangle implements Drawable {
 
     @Override
     public void setColor(float red, float green, float blue) {
+    }
 
+    @Override
+    public Drawable setScale(float scale) {
+        vertexA.setX(scale * vertexA.getX());
+        vertexA.setY(scale * vertexA.getY());
+
+        vertexB.setX(scale * vertexB.getX());
+        vertexB.setY(scale * vertexB.getY());
+
+        vertexC.setX(scale * vertexC.getX());
+        vertexC.setY(scale * vertexC.getY());
+        return new Triangle2d(vertexA, vertexB, vertexC);
     }
 }

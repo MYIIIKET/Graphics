@@ -40,6 +40,17 @@ public class Line2d implements Drawable {
         line.glColor3f(color.getRed(), color.getGreen(), color.getBlue());
     }
 
+    @Override
+    public Drawable setScale(float scale) {
+        start.setX(scale * start.getX());
+        start.setY(scale * start.getY());
+
+        end.setX(scale * end.getX());
+        end.setY(scale * end.getY());
+
+        return new Line2d(start.getX(), start.getY(), end.getX(), end.getY());
+    }
+
     public void setColor(Color color) {
         this.color = color;
         line.glColor3f(color.getRed(), color.getGreen(), color.getBlue());

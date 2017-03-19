@@ -60,4 +60,11 @@ public class Dot2d implements Drawable {
         color.setGreen(green);
         color.setBlue(blue);
     }
+
+    @Override
+    public Drawable setScale(float scale) {
+        coord.setX(scale * coord.getX());
+        coord.setY(scale * coord.getY());
+        return new Dot2d(coord.getX(), coord.getY());
+    }
 }

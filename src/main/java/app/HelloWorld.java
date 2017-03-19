@@ -2,12 +2,7 @@ package app;
 
 import Color.Color;
 import Coordinates.Coord2d;
-import Figures.Dot.Dot2d;
-import Figures.Dot.Dot3d;
-import Figures.Line.Line2d;
-import Figures.Line.Line3d;
-import Figures.Triangle.Triangle;
-import Interfaces.Drawable;
+import Figures.Triangle.Triangle2d;
 import org.lwjgl.*;
 import org.lwjgl.glfw.*;
 import org.lwjgl.opengl.*;
@@ -116,20 +111,17 @@ public class HelloWorld {
 
         // Run the rendering loop until the user has attempted to close
         // the window or has pressed the ESCAPE key.
-        Coord2d A = new Coord2d(50, 300);
-        Coord2d B = new Coord2d(200, 50);
-        Coord2d C = new Coord2d(100, 50);
-        Triangle triangle = new Triangle(A, B, C);
-        Color color = new Color(1, 0, 0);
-        triangle.setColorA(color);
-        color.setRed(0);
-        color.setGreen(1);
-        color.setBlue(0);
-        triangle.setColorB(color);
-        color.setRed(0);
-        color.setGreen(0);
-        color.setBlue(1);
-        triangle.setColorC(color);
+        Coord2d A = new Coord2d(0, 0);
+        Coord2d B = new Coord2d(100, 0);
+        Coord2d C = new Coord2d(50, 100);
+        Color colorA = new Color(1, 0, 0);
+        Color colorB = new Color(0, 1, 0);
+        Color colorC = new Color(0, 0, 1);
+        Triangle2d triangle = new Triangle2d(A, B, C);
+        triangle.setColorA(colorA);
+        triangle.setColorB(colorB);
+        triangle.setColorC(colorC);
+        triangle.setScale(5);
 
 
         while (!glfwWindowShouldClose(window)) {

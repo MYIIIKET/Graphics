@@ -1,6 +1,7 @@
 package Figures.Dot;
 
 import Coordinates.Coord3d;
+import Interfaces.Drawable;
 import org.lwjgl.opengl.GL11;
 
 public class Dot3d extends Dot2d {
@@ -42,5 +43,11 @@ public class Dot3d extends Dot2d {
         coord.setX(x);
         coord.setY(y);
         coord.setZ(z);
+    }
+
+    @Override
+    public Drawable setScale(float scale) {
+        coord.setZ(scale * coord.getZ());
+        return new Dot3d(coord.getX(), coord.getY(), coord.getZ());
     }
 }

@@ -2,6 +2,7 @@ package Figures.Line;
 
 
 import Coordinates.Coord3d;
+import Interfaces.Drawable;
 import org.lwjgl.opengl.GL11;
 
 public class Line3d extends Line2d {
@@ -57,5 +58,13 @@ public class Line3d extends Line2d {
     @Override
     public void setLine(GL11 line) {
         this.line = line;
+    }
+
+    @Override
+    public Drawable setScale(float scale) {
+        start.setZ(scale * start.getZ());
+        end.setZ(scale * end.getZ());
+
+        return new Line3d(start.getX(), start.getY(), start.getZ(), end.getX(), end.getY(), end.getZ());
     }
 }
