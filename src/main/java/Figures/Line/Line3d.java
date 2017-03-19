@@ -16,12 +16,6 @@ public class Line3d extends Line2d {
         super(xStart, yStart, xEnd, yEnd);
         start = new Coord3d(super.getStart(), zStart);
         end = new Coord3d(super.getEnd(), zEnd);
-//        start.setX(xStart);
-//        start.setY(yStart);
-//        start.setZ(zStart);
-//        end.setX(xEnd);
-//        end.setY(yEnd);
-//        end.setZ(zEnd);
     }
 
     @Override
