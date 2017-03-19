@@ -3,6 +3,7 @@ package app;
 import Color.Color;
 import Coordinates.Coord2d;
 import Figures.Dot.Dot2d;
+import Figures.Line.Line3d;
 import Figures.Triangle.Triangle2d;
 import org.lwjgl.*;
 import org.lwjgl.glfw.*;
@@ -112,23 +113,16 @@ public class HelloWorld {
 
         // Run the rendering loop until the user has attempted to close
         // the window or has pressed the ESCAPE key.
-        Coord2d A = new Coord2d(-50, -50);
-        Coord2d B = new Coord2d(100, -50);
-        Coord2d C = new Coord2d(0, 100);
-        Color colorA = new Color(1, 0, 0);
-        Color colorB = new Color(0, 1, 0);
-        Color colorC = new Color(0, 0, 1);
-        Triangle2d triangle = new Triangle2d(A, B, C);
-        triangle.setColorA(colorA);
-        triangle.setColorB(colorB);
-        triangle.setColorC(colorC);
-        triangle.setScale(3);
 
 
+        Line3d line = new Line3d(-50, -50, 5, 50, 50, 0);
+        line.setColor(0, 1, 0);
         while (!glfwWindowShouldClose(window)) {
             glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT); // clear the framebuffer
 
-            triangle.draw();
+
+            line.draw();
+
             glfwSwapBuffers(window); // swap the color buffers
 
             // Poll for window events. The key callback above will only be
