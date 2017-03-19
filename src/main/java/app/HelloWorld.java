@@ -2,9 +2,11 @@ package app;
 
 import Color.Color;
 import Coordinates.Coord2d;
+import Coordinates.Coord3d;
 import Figures.Dot.Dot2d;
 import Figures.Line.Line3d;
 import Figures.Triangle.Triangle2d;
+import Figures.Triangle.Triangle3d;
 import org.lwjgl.*;
 import org.lwjgl.glfw.*;
 import org.lwjgl.opengl.*;
@@ -102,17 +104,41 @@ public class HelloWorld {
         // bindings available for use.
         GL.createCapabilities();
 
-        GL11.glMatrixMode(GL11.GL_PROJECTION);
+        glMatrixMode(GL_PROJECTION);
         GL11.glLoadIdentity();
-        GL11.glOrtho(-800, 800, -600, 600, 1, -1);
+        GL11.glOrtho(-800, 800, -600, 600, 500, -500);
+//        GL11.glOrtho(1, 1, 1, 1, 1, -1);
         GL11.glMatrixMode(GL11.GL_MODELVIEW);
+
 
         // Set the clear color
         glClearColor(0.0f, 0.0f, 0.0f, 0.0f);
+        glClearDepth(100.0f);
+        GL11.glEnable(GL_DEPTH_TEST);
+        GL11.glDepthFunc(GL_LEQUAL);
+        GL11.glShadeModel(GL_SMOOTH);
+        GL11.glHint(GL_PERSPECTIVE_CORRECTION_HINT, GL_NICEST);
 
 
         // Run the rendering loop until the user has attempted to close
         // the window or has pressed the ESCAPE key.
+        Coord3d A = new Coord3d(-50, -50, -50);
+        Coord3d B = new Coord3d(50, -50, 0);
+        Coord3d C = new Coord3d(0, 50, 0);
+        Coord3d D = new Coord3d(0, 0, 50);
+
+        Color colorA = new Color(0.3f, 0, 0);
+        Color colorB = new Color(0, 1, 0);
+        Color colorC = new Color(0, 0, 1);
+        Color colorD = new Color(1, 0, 1);
+
+        Triangle3d triangle = new Triangle3d(A, B, C, D);
+        triangle.setColorA(colorA);
+        triangle.setColorB(colorB);
+        triangle.setColorC(colorC);
+        triangle.setColorD(colorD);
+
+        triangle.setScale(5);
 
 
         Line3d line = new Line3d(-50, -50, 5, 50, 50, 0);
@@ -121,7 +147,8 @@ public class HelloWorld {
             glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT); // clear the framebuffer
 
 
-            line.draw();
+            triangle.draw();
+            triangle.getTriangle().glRotatef(3f, 1, 1, 0);
 
             glfwSwapBuffers(window); // swap the color buffers
 
