@@ -87,4 +87,12 @@ public class Line2d implements Drawable {
     public void setThickness(float thickness) {
         line.glLineWidth(thickness);
     }
+
+    public void move(float xStep, float yStep) {
+        start.setX(start.getX() + xStep);
+        start.setY(start.getY() + yStep);
+
+        end.setX(end.getX() + xStep);
+        end.setY(end.getY() + yStep);
+    }
 }

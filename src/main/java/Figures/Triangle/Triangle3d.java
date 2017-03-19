@@ -6,9 +6,6 @@ import Coordinates.Coord3d;
 import Interfaces.Drawable;
 import org.lwjgl.opengl.GL11;
 
-import static org.lwjgl.opengl.GL11.glColor3f;
-import static org.lwjgl.opengl.GL11.glVertex3f;
-
 public class Triangle3d implements Drawable {
 
     private GL11 triangle;
@@ -149,5 +146,23 @@ public class Triangle3d implements Drawable {
         vertexD.setY(scale * vertexD.getY());
         vertexD.setZ(scale * vertexD.getZ());
         return new Triangle3d(vertexA, vertexB, vertexC, vertexD);
+    }
+
+    public void move(float xStep, float yStep, float zStep) {
+        vertexA.setX(vertexA.getX() + xStep);
+        vertexA.setY(vertexA.getY() + yStep);
+        vertexA.setZ(vertexA.getZ() + zStep);
+
+        vertexB.setX(vertexB.getX() + xStep);
+        vertexB.setY(vertexB.getY() + yStep);
+        vertexB.setZ(vertexB.getZ() + zStep);
+
+        vertexC.setX(vertexC.getX() + xStep);
+        vertexC.setY(vertexC.getY() + yStep);
+        vertexC.setZ(vertexC.getZ() + zStep);
+
+        vertexD.setX(vertexD.getX() + xStep);
+        vertexD.setY(vertexD.getY() + yStep);
+        vertexD.setZ(vertexD.getZ() + zStep);
     }
 }

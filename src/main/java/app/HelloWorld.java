@@ -123,7 +123,7 @@ public class HelloWorld {
         // Run the rendering loop until the user has attempted to close
         // the window or has pressed the ESCAPE key.
         Coord3d A = new Coord3d(-50, -50, -50);
-        Coord3d B = new Coord3d(50, -50, 0);
+        Coord3d B = new Coord3d(50, -50, -50);
         Coord3d C = new Coord3d(0, 50, 0);
         Coord3d D = new Coord3d(0, 0, 50);
 

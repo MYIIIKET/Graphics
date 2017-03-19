@@ -50,4 +50,8 @@ public class Dot3d extends Dot2d {
         coord.setZ(scale * coord.getZ());
         return new Dot3d(coord.getX(), coord.getY(), coord.getZ());
     }
+    
+    public void move(float zStep) {
+        coord.setZ(coord.getZ() + zStep);
+    }
 }

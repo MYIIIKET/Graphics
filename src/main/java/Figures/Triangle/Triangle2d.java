@@ -110,4 +110,15 @@ public class Triangle2d implements Drawable {
         vertexC.setY(scale * vertexC.getY());
         return new Triangle2d(vertexA, vertexB, vertexC);
     }
+
+    public void move(float xStep, float yStep) {
+        vertexA.setX(vertexA.getX() + xStep);
+        vertexA.setY(vertexA.getY() + yStep);
+
+        vertexB.setX(vertexB.getX() + xStep);
+        vertexB.setY(vertexB.getY() + yStep);
+
+        vertexC.setX(vertexC.getX() + xStep);
+        vertexC.setY(vertexC.getY() + yStep);
+    }
 }

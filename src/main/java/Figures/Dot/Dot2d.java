@@ -67,4 +67,9 @@ public class Dot2d implements Drawable {
         coord.setY(scale * coord.getY());
         return new Dot2d(coord.getX(), coord.getY());
     }
+
+    public void move(float xStep, float yStep) {
+        coord.setX(coord.getX() + xStep);
+        coord.setY(coord.getY() + yStep);
+    }
 }

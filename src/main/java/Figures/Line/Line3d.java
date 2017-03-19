@@ -61,4 +61,9 @@ public class Line3d extends Line2d {
 
         return new Line3d(start.getX(), start.getY(), start.getZ(), end.getX(), end.getY(), end.getZ());
     }
+
+    public void move(float zStep) {
+        start.setZ(start.getZ() + zStep);
+        end.setZ(end.getZ() + zStep);
+    }
 }
