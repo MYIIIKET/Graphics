@@ -106,8 +106,8 @@ public class HelloWorld {
 
         glMatrixMode(GL_PROJECTION);
         GL11.glLoadIdentity();
-        GL11.glOrtho(-800, 800, -600, 600, 500, -500);
-//        GL11.glOrtho(1, 1, 1, 1, 1, -1);
+//        GL11.glOrtho(-800, 800, -600, 600, 500, -500);
+        GL11.glOrtho(-10, 50, -10, 50, 50, -50);
         GL11.glMatrixMode(GL11.GL_MODELVIEW);
 
 
@@ -118,38 +118,93 @@ public class HelloWorld {
         GL11.glDepthFunc(GL_LEQUAL);
         GL11.glShadeModel(GL_SMOOTH);
         GL11.glHint(GL_PERSPECTIVE_CORRECTION_HINT, GL_NICEST);
+        GL11.glEnable(GL11.GL_TEXTURE_2D);
+
+        TextureLoader loader = new TextureLoader();
+        int texture = loader.loadTexture("textures/wood.png");
+        System.out.println(texture);
+
+        Coord2d A = new Coord2d(-50, -50);
+        Coord2d B = new Coord2d(50, -50);
+        Coord2d C = new Coord2d(0, 50);
+        Color color = new Color(255, 0, 0);
+        Triangle2d triangle = new Triangle2d(A, B, C);
+        triangle.setColorA(color);
+        triangle.setColorB(color);
+        triangle.setColorC(color);
+
 
 
         // Run the rendering loop until the user has attempted to close
         // the window or has pressed the ESCAPE key.
-        Coord3d A = new Coord3d(-50, -50, -50);
-        Coord3d B = new Coord3d(50, -50, -50);
-        Coord3d C = new Coord3d(0, 50, 0);
-        Coord3d D = new Coord3d(0, 0, 50);
 
-        Color colorA = new Color(255, 0, 0);
-        Color colorB = new Color(0, 255, 0);
-        Color colorC = new Color(0, 0, 255);
-        Color colorD = new Color(255, 0, 255);
-
-        Triangle3d triangle = new Triangle3d(A, B, C, D);
-        triangle.setColorA(colorA);
-        triangle.setColorB(colorB);
-        triangle.setColorC(colorC);
-        triangle.setColorD(colorD);
-
-        triangle.setScale(5);
-
-
-        Line3d line = new Line3d(-50, -50, 5, 50, 50, 0);
-        line.setColor(0, 1, 0);
         while (!glfwWindowShouldClose(window)) {
             glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT); // clear the framebuffer
 
 
-            triangle.draw();
-//            triangle.getTriangle().glRotatef(3f, 1, 1, 0);
-            
+
+
+
+            texture = loader.loadTexture("textures/wood.png");
+
+            glBindTexture(GL_TEXTURE_2D, texture);
+
+            glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL12.GL_CLAMP_TO_EDGE);
+            glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL12.GL_CLAMP_TO_EDGE);
+
+            glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
+            glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
+
+            glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA8, loader.getBufferedImage().getWidth(),
+                    loader.getBufferedImage().getHeight(), 0, GL_RGBA, GL_UNSIGNED_BYTE, loader.getBuffer());
+
+
+            glBegin(GL11.GL_QUADS);
+
+            // Front Face
+            glTexCoord2f(0.0f, 0.0f); glVertex3f(-1.0f, -1.0f, 1.0f);
+            glTexCoord2f(1.0f, 0.0f); glVertex3f( 1.0f, -1.0f, 1.0f);
+            glTexCoord2f(1.0f, 1.0f); glVertex3f( 1.0f, 1.0f, 1.0f);
+            glTexCoord2f(0.0f, 1.0f); glVertex3f(-1.0f, 1.0f, 1.0f);
+
+            // Back Face
+            glTexCoord2f(1.0f, 0.0f); glVertex3f(-1.0f, -1.0f, -1.0f);
+            glTexCoord2f(1.0f, 1.0f); glVertex3f(-1.0f, 1.0f, -1.0f);
+            glTexCoord2f(0.0f, 1.0f); glVertex3f( 1.0f, 1.0f, -1.0f);
+            glTexCoord2f(0.0f, 0.0f); glVertex3f( 1.0f, -1.0f, -1.0f);
+
+            // Top Face
+            glTexCoord2f(0.0f, 1.0f); glVertex3f(-1.0f, 1.0f, -1.0f);
+            glTexCoord2f(0.0f, 0.0f); glVertex3f(-1.0f, 1.0f, 1.0f);
+            glTexCoord2f(1.0f, 0.0f); glVertex3f( 1.0f, 1.0f, 1.0f);
+            glTexCoord2f(1.0f, 1.0f); glVertex3f( 1.0f, 1.0f, -1.0f);
+
+            // Bottom Face
+            glTexCoord2f(1.0f, 1.0f); glVertex3f(-1.0f, -1.0f, -1.0f);
+            glTexCoord2f(0.0f, 1.0f); glVertex3f( 1.0f, -1.0f, -1.0f);
+            glTexCoord2f(0.0f, 0.0f); glVertex3f( 1.0f, -1.0f, 1.0f);
+            glTexCoord2f(1.0f, 0.0f); glVertex3f(-1.0f, -1.0f, 1.0f);
+
+            // Right face
+            glTexCoord2f(1.0f, 0.0f); glVertex3f( 1.0f, -1.0f, -1.0f);
+            glTexCoord2f(1.0f, 1.0f); glVertex3f( 1.0f, 1.0f, -1.0f);
+            glTexCoord2f(0.0f, 1.0f); glVertex3f( 1.0f, 1.0f, 1.0f);
+            glTexCoord2f(0.0f, 0.0f); glVertex3f( 1.0f, -1.0f, 1.0f);
+
+            // Left Face
+            glTexCoord2f(0.0f, 0.0f); glVertex3f(-1.0f, -1.0f, -1.0f);
+            glTexCoord2f(1.0f, 0.0f); glVertex3f(-1.0f, -1.0f, 1.0f);
+            glTexCoord2f(1.0f, 1.0f); glVertex3f(-1.0f, 1.0f, 1.0f);
+            glTexCoord2f(0.0f, 1.0f); glVertex3f(-1.0f, 1.0f, -1.0f);
+
+            glEnd();
+            glFlush();
+
+            glRotatef(2,1,1,0);
+
+
+
+
 
             glfwSwapBuffers(window); // swap the color buffers
 
