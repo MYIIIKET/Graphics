@@ -127,10 +127,10 @@ public class HelloWorld {
         Coord3d C = new Coord3d(0, 50, 0);
         Coord3d D = new Coord3d(0, 0, 50);
 
-        Color colorA = new Color(0.3f, 0, 0);
-        Color colorB = new Color(0, 1, 0);
-        Color colorC = new Color(0, 0, 1);
-        Color colorD = new Color(1, 0, 1);
+        Color colorA = new Color(255, 0, 0);
+        Color colorB = new Color(0, 255, 0);
+        Color colorC = new Color(0, 0, 255);
+        Color colorD = new Color(255, 0, 255);
 
         Triangle3d triangle = new Triangle3d(A, B, C, D);
         triangle.setColorA(colorA);

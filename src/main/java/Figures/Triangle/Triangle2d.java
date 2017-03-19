@@ -99,10 +99,6 @@ public class Triangle2d implements Drawable {
     }
 
     @Override
-    public void setColor(float red, float green, float blue) {
-    }
-
-    @Override
     public Drawable setScale(float scale) {
         vertexA.setX(scale * vertexA.getX());
         vertexA.setY(scale * vertexA.getY());

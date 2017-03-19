@@ -2,14 +2,25 @@ package Color;
 
 public class Color {
 
-    float red;
-    float green;
-    float blue;
+    private float red;
+    private float green;
+    private float blue;
+    private static final int base = 255;
 
-    public Color(float red, float green, float blue) {
-        setRed(red);
-        setGreen(green);
-        setBlue(blue);
+
+    public Color(int red, int green, int blue) {
+        if (red > base) {
+            red = red % base;
+        }
+        if (green > base) {
+            green = green % base;
+        }
+        if (blue > base) {
+            blue = blue % base;
+        }
+        setRed((float) red / 255);
+        setGreen((float) green / 255);
+        setBlue((float) blue / 255);
     }
 
     public float getRed() {

@@ -55,7 +55,7 @@ public class Dot2d implements Drawable {
     }
 
     @Override
-    public void setColor(float red, float green, float blue) {
+    public void setColor(int red, int green, int blue) {
         color.setRed(red);
         color.setGreen(green);
         color.setBlue(blue);
