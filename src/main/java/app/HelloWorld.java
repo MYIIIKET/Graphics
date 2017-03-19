@@ -148,7 +148,8 @@ public class HelloWorld {
 
 
             triangle.draw();
-            triangle.getTriangle().glRotatef(3f, 1, 1, 0);
+//            triangle.getTriangle().glRotatef(3f, 1, 1, 0);
+            
 
             glfwSwapBuffers(window); // swap the color buffers
 
