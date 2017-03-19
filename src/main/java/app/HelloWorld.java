@@ -2,6 +2,7 @@ package app;
 
 import Color.Color;
 import Coordinates.Coord2d;
+import Figures.Dot.Dot2d;
 import Figures.Triangle.Triangle2d;
 import org.lwjgl.*;
 import org.lwjgl.glfw.*;
@@ -54,7 +55,7 @@ public class HelloWorld {
         glfwWindowHint(GLFW_RESIZABLE, GLFW_TRUE); // the window will be resizable
 
         // Create the window
-        window = glfwCreateWindow(300, 300, "Hello World!", NULL, NULL);
+        window = glfwCreateWindow(800, 600, "Hello World!", NULL, NULL);
         if (window == NULL)
             throw new RuntimeException("Failed to create the GLFW window");
 
@@ -102,7 +103,7 @@ public class HelloWorld {
 
         GL11.glMatrixMode(GL11.GL_PROJECTION);
         GL11.glLoadIdentity();
-        GL11.glOrtho(0, 800, 0, 600, 1, -1);
+        GL11.glOrtho(-800, 800, -600, 600, 1, -1);
         GL11.glMatrixMode(GL11.GL_MODELVIEW);
 
         // Set the clear color
@@ -111,9 +112,9 @@ public class HelloWorld {
 
         // Run the rendering loop until the user has attempted to close
         // the window or has pressed the ESCAPE key.
-        Coord2d A = new Coord2d(0, 0);
-        Coord2d B = new Coord2d(100, 0);
-        Coord2d C = new Coord2d(50, 100);
+        Coord2d A = new Coord2d(-50, -50);
+        Coord2d B = new Coord2d(100, -50);
+        Coord2d C = new Coord2d(0, 100);
         Color colorA = new Color(1, 0, 0);
         Color colorB = new Color(0, 1, 0);
         Color colorC = new Color(0, 0, 1);
@@ -121,7 +122,7 @@ public class HelloWorld {
         triangle.setColorA(colorA);
         triangle.setColorB(colorB);
         triangle.setColorC(colorC);
-        triangle.setScale(5);
+        triangle.setScale(3);
 
 
         while (!glfwWindowShouldClose(window)) {

@@ -14,14 +14,14 @@ public class Line3d extends Line2d {
 
     public Line3d(float xStart, float yStart, float zStart, float xEnd, float yEnd, float zEnd) {
         super(xStart, yStart, xEnd, yEnd);
-        start = new Coord3d();
-        end = new Coord3d();
-        start.setX(xStart);
-        start.setY(yStart);
-        start.setZ(zStart);
-        end.setX(xEnd);
-        end.setY(yEnd);
-        end.setZ(zEnd);
+        start = new Coord3d(super.getStart(), zStart);
+        end = new Coord3d(super.getEnd(), zEnd);
+//        start.setX(xStart);
+//        start.setY(yStart);
+//        start.setZ(zStart);
+//        end.setX(xEnd);
+//        end.setY(yEnd);
+//        end.setZ(zEnd);
     }
 
     @Override
