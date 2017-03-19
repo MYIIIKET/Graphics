@@ -106,8 +106,8 @@ public class HelloWorld {
 
         glMatrixMode(GL_PROJECTION);
         GL11.glLoadIdentity();
-//        GL11.glOrtho(-800, 800, -600, 600, 500, -500);
-        GL11.glOrtho(-10, 50, -10, 50, 50, -50);
+        GL11.glOrtho(-800, 800, -600, 600, 500, -500);
+//        GL11.glOrtho(-10, 50, -10, 50, 50, -50);
         GL11.glMatrixMode(GL11.GL_MODELVIEW);
 
 
@@ -137,15 +137,11 @@ public class HelloWorld {
 
         // Run the rendering loop until the user has attempted to close
         // the window or has pressed the ESCAPE key.
-
+        glScalef(100,100,100);
         while (!glfwWindowShouldClose(window)) {
             glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT); // clear the framebuffer
 
 
-
-
-
-            texture = loader.loadTexture("textures/wood.png");
 
             glBindTexture(GL_TEXTURE_2D, texture);
 
