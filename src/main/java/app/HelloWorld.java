@@ -157,11 +157,13 @@ public class HelloWorld {
         // Run the rendering loop until the user has attempted to close
         // the window or has pressed the ESCAPE key.
         float rot = 0;
+        triangle.setScale(3);
         while (!glfwWindowShouldClose(window)) {
             glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT); // clear the framebuffer
 
             rectangle.setTexture(cockTexture,cockBufferedImage,cockByteBuffer);
             rectangle.draw();
+
 
             triangle.setTexture(woodTexture,woodBufferedImage,woddByteBuffer);
             triangle.draw();

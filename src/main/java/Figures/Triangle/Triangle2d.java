@@ -111,7 +111,9 @@ public class Triangle2d implements Drawable {
 
         vertexC.setX(scale * vertexC.getX());
         vertexC.setY(scale * vertexC.getY());
-        return new Triangle2d(vertexA, vertexB, vertexC);
+        Triangle2d triangle = new Triangle2d(vertexA, vertexB, vertexC);
+        triangle.move(-vertexA.getX(), -vertexA.getY());
+        return triangle;
     }
 
     public void move(float xStep, float yStep) {

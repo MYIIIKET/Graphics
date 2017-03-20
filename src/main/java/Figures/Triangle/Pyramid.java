@@ -7,7 +7,7 @@ import org.lwjgl.opengl.GL11;
 
 import static org.lwjgl.opengl.GL11.*;
 
-public class Triangle3d implements Drawable {
+public class Pyramid implements Drawable {
 
     private Coord3d vertexA;
     private Coord3d vertexB;
@@ -19,7 +19,7 @@ public class Triangle3d implements Drawable {
     private Color colorC;
     private Color colorD;
 
-    public Triangle3d(Coord3d vertexA, Coord3d vertexB, Coord3d vertexC, Coord3d vertexD) {
+    public Pyramid(Coord3d vertexA, Coord3d vertexB, Coord3d vertexC, Coord3d vertexD) {
         setVertexA(vertexA);
         setVertexB(vertexB);
         setVertexC(vertexC);
@@ -136,7 +136,7 @@ public class Triangle3d implements Drawable {
         vertexD.setX(scale * vertexD.getX());
         vertexD.setY(scale * vertexD.getY());
         vertexD.setZ(scale * vertexD.getZ());
-        return new Triangle3d(vertexA, vertexB, vertexC, vertexD);
+        return new Pyramid(vertexA, vertexB, vertexC, vertexD);
     }
 
     public void move(float xStep, float yStep, float zStep) {
