@@ -120,9 +120,12 @@ public class HelloWorld {
         GL11.glShadeModel(GL_SMOOTH);
         GL11.glHint(GL_PERSPECTIVE_CORRECTION_HINT, GL_NICEST);
         GL11.glEnable(GL11.GL_TEXTURE_2D);
+        GL11.glEnable(GL11.GL_BLEND);
+        GL11.glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+
 
         TextureLoader loader = new TextureLoader();
-        int texture = loader.loadTexture("textures/wood.png");
+        int texture = loader.loadTexture("textures/cock.png");
         System.out.println(texture);
 
         Coord2d A = new Coord2d(-50, -50);
@@ -138,15 +141,18 @@ public class HelloWorld {
         rectangle.setColorB(color);
         rectangle.setColorC(color);
         rectangle.setColorD(color);
-//        rectangle.setTexture(texture, loader.getBufferedImage(), loader.getBuffer());
+        rectangle.setTexture(texture, loader.getBufferedImage(), loader.getBuffer());
 
         // Run the rendering loop until the user has attempted to close
         // the window or has pressed the ESCAPE key.
+        rectangle.getRectangle().glScalef(5, 5, 5);
+        rectangle.getRectangle().glRotatef(180,1,0,0);
         while (!glfwWindowShouldClose(window)) {
             glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT); // clear the framebuffer
 
 
             rectangle.draw();
+            rectangle.getRectangle().glRotatef(2,0,1,0);
 
 
             glfwSwapBuffers(window); // swap the color buffers

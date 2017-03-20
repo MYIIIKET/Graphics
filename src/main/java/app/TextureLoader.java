@@ -35,7 +35,7 @@ public class TextureLoader {
         int[] pixels = new int[bufferedImage.getWidth() * bufferedImage.getHeight()];
 
         bufferedImage.getRGB(0, 0, bufferedImage.getWidth(),
-                bufferedImage.getWidth(), pixels, 0, bufferedImage.getWidth());
+                bufferedImage.getHeight(), pixels, 0, bufferedImage.getWidth());
         ByteBuffer buffer = getColorData(bufferedImage, pixels);
         this.buffer = buffer;
         this.bufferedImage = bufferedImage;
