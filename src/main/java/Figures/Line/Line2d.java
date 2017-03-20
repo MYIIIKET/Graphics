@@ -6,8 +6,9 @@ import Color.Color;
 import Interfaces.Drawable;
 import org.lwjgl.opengl.*;
 
+import static org.lwjgl.opengl.GL11.*;
+
 public class Line2d implements Drawable {
-    private GL11 line;
 
     private Coord2d start;
     private Coord2d end;
@@ -25,10 +26,10 @@ public class Line2d implements Drawable {
 
     @Override
     public void draw() {
-        line.glBegin(GL11.GL_LINES);
-        line.glVertex2f(start.getX(), start.getY());
-        line.glVertex2f(end.getX(), end.getY());
-        line.glEnd();
+        glBegin(GL11.GL_LINES);
+        glVertex2f(start.getX(), start.getY());
+        glVertex2f(end.getX(), end.getY());
+        glEnd();
     }
 
 
@@ -37,7 +38,7 @@ public class Line2d implements Drawable {
         color.setRed(red);
         color.setGreen(green);
         color.setBlue(blue);
-        line.glColor3f(color.getRed(), color.getGreen(), color.getBlue());
+        glColor3f(color.getRed(), color.getGreen(), color.getBlue());
     }
 
     @Override
@@ -53,7 +54,7 @@ public class Line2d implements Drawable {
 
     public void setColor(Color color) {
         this.color = color;
-        line.glColor3f(color.getRed(), color.getGreen(), color.getBlue());
+        glColor3f(color.getRed(), color.getGreen(), color.getBlue());
     }
 
     public Coord2d getStart() {
@@ -76,16 +77,8 @@ public class Line2d implements Drawable {
         return color;
     }
 
-    public GL11 getLine() {
-        return line;
-    }
-
-    public void setLine(GL11 line) {
-        this.line = line;
-    }
-
     public void setThickness(float thickness) {
-        line.glLineWidth(thickness);
+        glLineWidth(thickness);
     }
 
     public void move(float xStep, float yStep) {

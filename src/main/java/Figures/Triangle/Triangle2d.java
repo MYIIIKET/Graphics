@@ -4,9 +4,16 @@ import Color.Color;
 import Coordinates.Coord2d;
 import Interfaces.Drawable;
 import org.lwjgl.opengl.GL11;
+import org.lwjgl.opengl.GL12;
+
+import java.awt.image.BufferedImage;
+import java.nio.ByteBuffer;
+
+import static org.lwjgl.opengl.GL11.*;
+import static org.lwjgl.opengl.GL11.GL_RGBA;
+import static org.lwjgl.opengl.GL11.GL_UNSIGNED_BYTE;
 
 public class Triangle2d implements Drawable {
-    private GL11 triangle;
 
     private Color colorA;
     private Color colorB;
@@ -40,14 +47,6 @@ public class Triangle2d implements Drawable {
 
     public void setVertexB(Coord2d vertexB) {
         this.vertexB = vertexB;
-    }
-
-    public GL11 getTriangle() {
-        return triangle;
-    }
-
-    public void setTriangle(GL11 triangle) {
-        this.triangle = triangle;
     }
 
     public Coord2d getVertexC() {
@@ -84,18 +83,22 @@ public class Triangle2d implements Drawable {
 
     @Override
     public void draw() {
-        triangle.glBegin(GL11.GL_TRIANGLES);
+        glBegin(GL11.GL_TRIANGLES);
 
-        triangle.glColor3f(colorA.getRed(), colorA.getGreen(), colorA.getBlue());
-        triangle.glVertex2f(vertexA.getX(), vertexA.getY());
+        glColor3f(colorA.getRed(), colorA.getGreen(), colorA.getBlue());
+        glTexCoord2f(0.0f, 0.0f);
+        glVertex2f(vertexA.getX(), vertexA.getY());
 
-        triangle.glColor3f(colorB.getRed(), colorB.getGreen(), colorB.getBlue());
-        triangle.glVertex2f(vertexB.getX(), vertexB.getY());
+        glColor3f(colorB.getRed(), colorB.getGreen(), colorB.getBlue());
+        glTexCoord2f(1.0f, 0.5f);
+        glVertex2f(vertexB.getX(), vertexB.getY());
 
-        triangle.glColor3f(colorC.getRed(), colorC.getGreen(), colorC.getBlue());
-        triangle.glVertex2f(vertexC.getX(), vertexC.getY());
+        glColor3f(colorC.getRed(), colorC.getGreen(), colorC.getBlue());
+        glTexCoord2f(0.0f, 1.0f);
+        glVertex2f(vertexC.getX(), vertexC.getY());
 
-        triangle.glEnd();
+        glEnd();
+        glFlush();
     }
 
     @Override
@@ -120,5 +123,18 @@ public class Triangle2d implements Drawable {
 
         vertexC.setX(vertexC.getX() + xStep);
         vertexC.setY(vertexC.getY() + yStep);
+    }
+
+    public void setTexture(int texture, BufferedImage bufferedImage, ByteBuffer buffer) {
+        glBindTexture(GL_TEXTURE_2D, texture);
+
+        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL12.GL_CLAMP_TO_EDGE);
+        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL12.GL_CLAMP_TO_EDGE);
+
+        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
+        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
+
+        glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA8, bufferedImage.getWidth(),
+                bufferedImage.getHeight(), 0, GL_RGBA, GL_UNSIGNED_BYTE, buffer);
     }
 }

@@ -4,8 +4,9 @@ import Coordinates.Coord3d;
 import Interfaces.Drawable;
 import org.lwjgl.opengl.GL11;
 
+import static org.lwjgl.opengl.GL11.*;
+
 public class Dot3d extends Dot2d {
-    private GL11 dot;
     private Coord3d coord;
 
     public Dot3d(float x, float y, float z) {
@@ -15,21 +16,12 @@ public class Dot3d extends Dot2d {
 
     public void draw() {
 
-        dot.glColor3f(getColor().getRed(), getColor().getGreen(), getColor().getBlue());
-        dot.glBegin(GL11.GL_POINTS);
-        dot.glVertex3f(coord.getX(), coord.getY(), coord.getZ());
-        dot.glEnd();
+        glColor3f(getColor().getRed(), getColor().getGreen(), getColor().getBlue());
+        glBegin(GL11.GL_POINTS);
+        glVertex3f(coord.getX(), coord.getY(), coord.getZ());
+        glEnd();
     }
 
-    @Override
-    public GL11 getDot() {
-        return dot;
-    }
-
-    @Override
-    public void setDot(GL11 dot) {
-        this.dot = dot;
-    }
 
     public Coord3d getCoord() {
         return coord;
@@ -50,7 +42,7 @@ public class Dot3d extends Dot2d {
         coord.setZ(scale * coord.getZ());
         return new Dot3d(coord.getX(), coord.getY(), coord.getZ());
     }
-    
+
     public void move(float zStep) {
         coord.setZ(coord.getZ() + zStep);
     }

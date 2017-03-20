@@ -3,20 +3,16 @@ package Figures.Rectangle;
 import Color.Color;
 import Coordinates.Coord2d;
 import Interfaces.Drawable;
-import app.TextureLoader;
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.opengl.GL12;
 
 import java.awt.image.BufferedImage;
-import java.nio.Buffer;
 import java.nio.ByteBuffer;
 
 import static org.lwjgl.opengl.GL11.*;
 import static org.lwjgl.opengl.GL11.GL_UNSIGNED_BYTE;
 
 public class Rectangle2d implements Drawable {
-
-    private GL11 rectangle;
 
     private Color colorA;
     private Color colorB;
@@ -35,13 +31,6 @@ public class Rectangle2d implements Drawable {
         setVertexD(vertexD);
     }
 
-    public GL11 getRectangle() {
-        return rectangle;
-    }
-
-    public void setRectangle(GL11 rectangle) {
-        this.rectangle = rectangle;
-    }
 
     public Color getColorA() {
         return colorA;
@@ -109,40 +98,39 @@ public class Rectangle2d implements Drawable {
 
     @Override
     public void draw() {
-        rectangle.glBegin(GL11.GL_QUADS);
+        glBegin(GL11.GL_QUADS);
 
-        rectangle.glColor3f(colorA.getRed(), colorA.getGreen(), colorA.getBlue());
+        glColor3f(colorA.getRed(), colorA.getGreen(), colorA.getBlue());
         glTexCoord2f(0.0f, 0.0f);
-        rectangle.glVertex2f(vertexA.getX(), vertexA.getY());
+        glVertex2f(vertexA.getX(), vertexA.getY());
 
-        rectangle.glColor3f(colorB.getRed(), colorB.getGreen(), colorB.getBlue());
+        glColor3f(colorB.getRed(), colorB.getGreen(), colorB.getBlue());
         glTexCoord2f(1.0f, 0.0f);
-        rectangle.glVertex2f(vertexB.getX(), vertexB.getY());
+        glVertex2f(vertexB.getX(), vertexB.getY());
 
-        rectangle.glColor3f(colorC.getRed(), colorC.getGreen(), colorC.getBlue());
+        glColor3f(colorC.getRed(), colorC.getGreen(), colorC.getBlue());
         glTexCoord2f(1.0f, 1.0f);
-        rectangle.glVertex2f(vertexC.getX(), vertexC.getY());
+        glVertex2f(vertexC.getX(), vertexC.getY());
 
-        rectangle.glColor3f(colorD.getRed(), colorD.getGreen(), colorD.getBlue());
+        glColor3f(colorD.getRed(), colorD.getGreen(), colorD.getBlue());
         glTexCoord2f(0.0f, 1.0f);
-        rectangle.glVertex2f(vertexD.getX(), vertexD.getY());
+        glVertex2f(vertexD.getX(), vertexD.getY());
 
 
-        rectangle.glEnd();
-        rectangle.glFlush();
+        glEnd();
+        glFlush();
     }
 
     public void setTexture(int texture, BufferedImage bufferedImage, ByteBuffer buffer) {
+        glBindTexture(GL_TEXTURE_2D, texture);
 
-        rectangle.glBindTexture(GL_TEXTURE_2D, texture);
+        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL12.GL_CLAMP_TO_EDGE);
+        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL12.GL_CLAMP_TO_EDGE);
 
-        rectangle.glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL12.GL_CLAMP_TO_EDGE);
-        rectangle.glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL12.GL_CLAMP_TO_EDGE);
+        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
+        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
 
-        rectangle.glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
-        rectangle.glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
-
-        rectangle.glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA8, bufferedImage.getWidth(),
+        glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA8, bufferedImage.getWidth(),
                 bufferedImage.getHeight(), 0, GL_RGBA, GL_UNSIGNED_BYTE, buffer);
     }
 

@@ -5,10 +5,9 @@ import Coordinates.Coord3d;
 import Interfaces.Drawable;
 import org.lwjgl.opengl.GL11;
 
+import static org.lwjgl.opengl.GL11.*;
+
 public class Line3d extends Line2d {
-
-    private GL11 line;
-
     private Coord3d start;
     private Coord3d end;
 
@@ -38,21 +37,12 @@ public class Line3d extends Line2d {
 
     @Override
     public void draw() {
-        line.glBegin(GL11.GL_LINES);
-        line.glVertex3f(start.getX(), start.getY(), start.getZ());
-        line.glVertex3f(end.getX(), end.getY(), end.getZ());
-        line.glEnd();
+        glBegin(GL11.GL_LINES);
+        glVertex3f(start.getX(), start.getY(), start.getZ());
+        glVertex3f(end.getX(), end.getY(), end.getZ());
+        glEnd();
     }
 
-    @Override
-    public GL11 getLine() {
-        return line;
-    }
-
-    @Override
-    public void setLine(GL11 line) {
-        this.line = line;
-    }
 
     @Override
     public Drawable setScale(float scale) {

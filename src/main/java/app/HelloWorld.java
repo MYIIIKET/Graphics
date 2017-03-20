@@ -2,17 +2,15 @@ package app;
 
 import Color.Color;
 import Coordinates.Coord2d;
-import Coordinates.Coord3d;
-import Figures.Dot.Dot2d;
-import Figures.Line.Line3d;
 import Figures.Rectangle.Rectangle2d;
 import Figures.Triangle.Triangle2d;
-import Figures.Triangle.Triangle3d;
+import Texturing.TextureLoader;
 import org.lwjgl.*;
 import org.lwjgl.glfw.*;
 import org.lwjgl.opengl.*;
 import org.lwjgl.system.*;
 
+import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.nio.*;
 
@@ -104,12 +102,10 @@ public class HelloWorld {
         // creates the GLCapabilities instance and makes the OpenGL
         // bindings available for use.
         GL.createCapabilities();
-
         glMatrixMode(GL_PROJECTION);
+        GL11.glMatrixMode(GL11.GL_MODELVIEW);
         GL11.glLoadIdentity();
         GL11.glOrtho(-800, 800, -600, 600, 500, -500);
-//        GL11.glOrtho(-10, 50, -10, 50, 50, -50);
-        GL11.glMatrixMode(GL11.GL_MODELVIEW);
 
 
         // Set the clear color
@@ -124,36 +120,51 @@ public class HelloWorld {
         GL11.glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
 
+
+
         TextureLoader loader = new TextureLoader();
-        int texture = loader.loadTexture("textures/cock.png");
-        System.out.println(texture);
+        int cockTexture = loader.loadTexture("textures/cock.png");
+        BufferedImage cockBufferedImage = loader.getBufferedImage();
+        ByteBuffer cockByteBuffer = loader.getBuffer();
+
+        int woodTexture = loader.loadTexture("textures/wood.png");
+        BufferedImage woodBufferedImage = loader.getBufferedImage();
+        ByteBuffer woddByteBuffer = loader.getBuffer();
+        System.out.println(cockTexture);
+        System.out.println(woodTexture);
+
+        Color color = new Color(255, 255, 255);
 
         Coord2d A = new Coord2d(-50, -50);
         Coord2d B = new Coord2d(50, -50);
         Coord2d C = new Coord2d(50, 50);
         Coord2d D = new Coord2d(-50, 50);
-
-        Color color = new Color(255, 255, 255);
-
-
         Rectangle2d rectangle = new Rectangle2d(A, B, C, D);
         rectangle.setColorA(color);
         rectangle.setColorB(color);
         rectangle.setColorC(color);
         rectangle.setColorD(color);
-        rectangle.setTexture(texture, loader.getBufferedImage(), loader.getBuffer());
+
+        Coord2d A1 = new Coord2d(50, 50);
+        Coord2d B1 = new Coord2d(100, 50);
+        Coord2d C1 = new Coord2d(75, 100);
+        Triangle2d triangle = new Triangle2d(A1, B1, C1);
+        triangle.setColorA(color);
+        triangle.setColorB(color);
+        triangle.setColorC(color);
+
 
         // Run the rendering loop until the user has attempted to close
         // the window or has pressed the ESCAPE key.
-        rectangle.getRectangle().glScalef(5, 5, 5);
-        rectangle.getRectangle().glRotatef(180,1,0,0);
+        float rot = 0;
         while (!glfwWindowShouldClose(window)) {
             glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT); // clear the framebuffer
 
-
+            rectangle.setTexture(cockTexture,cockBufferedImage,cockByteBuffer);
             rectangle.draw();
-            rectangle.getRectangle().glRotatef(2,0,1,0);
 
+            triangle.setTexture(woodTexture,woodBufferedImage,woddByteBuffer);
+            triangle.draw();
 
             glfwSwapBuffers(window); // swap the color buffers
 

@@ -5,10 +5,11 @@ import Interfaces.Drawable;
 import Coordinates.Coord2d;
 import org.lwjgl.opengl.GL11;
 
+import static org.lwjgl.opengl.GL11.*;
+
 
 public class Dot2d implements Drawable {
 
-    private GL11 dot;
     private Coord2d coord;
     private Color color;
 
@@ -17,13 +18,6 @@ public class Dot2d implements Drawable {
         color = new Color(0, 0, 0);
     }
 
-    public GL11 getDot() {
-        return dot;
-    }
-
-    public void setDot(GL11 dot) {
-        this.dot = dot;
-    }
 
     public Coord2d getCoord() {
         return coord;
@@ -48,10 +42,10 @@ public class Dot2d implements Drawable {
 
     @Override
     public void draw() {
-        dot.glColor3f(getColor().getRed(), getColor().getGreen(), getColor().getBlue());
-        dot.glBegin(GL11.GL_POINTS);
-        dot.glVertex2f(coord.getX(), coord.getY());
-        dot.glEnd();
+        glColor3f(getColor().getRed(), getColor().getGreen(), getColor().getBlue());
+        glBegin(GL11.GL_POINTS);
+        glVertex2f(coord.getX(), coord.getY());
+        glEnd();
     }
 
     @Override

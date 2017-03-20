@@ -1,4 +1,4 @@
-package app;
+package Texturing;
 
 import org.lwjgl.BufferUtils;
 import org.lwjgl.opengl.*;

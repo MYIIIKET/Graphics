@@ -1,14 +1,13 @@
 package Figures.Triangle;
 
 import Color.Color;
-import Coordinates.Coord2d;
 import Coordinates.Coord3d;
 import Interfaces.Drawable;
 import org.lwjgl.opengl.GL11;
 
-public class Triangle3d implements Drawable {
+import static org.lwjgl.opengl.GL11.*;
 
-    private GL11 triangle;
+public class Triangle3d implements Drawable {
 
     private Coord3d vertexA;
     private Coord3d vertexB;
@@ -92,39 +91,31 @@ public class Triangle3d implements Drawable {
         this.vertexD = vertexD;
     }
 
-    public GL11 getTriangle() {
-        return triangle;
-    }
-
-    public void setTriangle(GL11 triangle) {
-        this.triangle = triangle;
-    }
-
     @Override
     public void draw() {
-        triangle.glBegin(GL11.GL_TRIANGLES);
+        glBegin(GL11.GL_TRIANGLES);
 
-        triangle.glColor3f(colorA.getRed(), colorA.getGreen(), colorA.getBlue());
-        triangle.glVertex3f(vertexA.getX(), vertexA.getY(), vertexA.getZ());
-        triangle.glVertex3f(vertexB.getX(), vertexB.getY(), vertexB.getZ());
-        triangle.glVertex3f(vertexC.getX(), vertexC.getY(), vertexC.getZ());
+        glColor3f(colorA.getRed(), colorA.getGreen(), colorA.getBlue());
+        glVertex3f(vertexA.getX(), vertexA.getY(), vertexA.getZ());
+        glVertex3f(vertexB.getX(), vertexB.getY(), vertexB.getZ());
+        glVertex3f(vertexC.getX(), vertexC.getY(), vertexC.getZ());
 
-        triangle.glColor3f(colorB.getRed(), colorB.getGreen(), colorB.getBlue());
-        triangle.glVertex3f(vertexB.getX(), vertexB.getY(), vertexB.getZ());
-        triangle.glVertex3f(vertexD.getX(), vertexD.getY(), vertexD.getZ());
-        triangle.glVertex3f(vertexC.getX(), vertexC.getY(), vertexC.getZ());
+        glColor3f(colorB.getRed(), colorB.getGreen(), colorB.getBlue());
+        glVertex3f(vertexB.getX(), vertexB.getY(), vertexB.getZ());
+        glVertex3f(vertexD.getX(), vertexD.getY(), vertexD.getZ());
+        glVertex3f(vertexC.getX(), vertexC.getY(), vertexC.getZ());
 
-        triangle.glColor3f(colorC.getRed(), colorC.getGreen(), colorC.getBlue());
-        triangle.glVertex3f(vertexD.getX(), vertexD.getY(), vertexD.getZ());
-        triangle.glVertex3f(vertexA.getX(), vertexA.getY(), vertexA.getZ());
-        triangle.glVertex3f(vertexC.getX(), vertexC.getY(), vertexC.getZ());
+        glColor3f(colorC.getRed(), colorC.getGreen(), colorC.getBlue());
+        glVertex3f(vertexD.getX(), vertexD.getY(), vertexD.getZ());
+        glVertex3f(vertexA.getX(), vertexA.getY(), vertexA.getZ());
+        glVertex3f(vertexC.getX(), vertexC.getY(), vertexC.getZ());
 
-        triangle.glColor3f(colorD.getRed(), colorD.getGreen(), colorD.getBlue());
-        triangle.glVertex3f(vertexA.getX(), vertexA.getY(), vertexA.getZ());
-        triangle.glVertex3f(vertexB.getX(), vertexB.getY(), vertexB.getZ());
-        triangle.glVertex3f(vertexD.getX(), vertexD.getY(), vertexD.getZ());
+        glColor3f(colorD.getRed(), colorD.getGreen(), colorD.getBlue());
+        glVertex3f(vertexA.getX(), vertexA.getY(), vertexA.getZ());
+        glVertex3f(vertexB.getX(), vertexB.getY(), vertexB.getZ());
+        glVertex3f(vertexD.getX(), vertexD.getY(), vertexD.getZ());
 
-        triangle.glEnd();
+        glEnd();
 
     }
 
