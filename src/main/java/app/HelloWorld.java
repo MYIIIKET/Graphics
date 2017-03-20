@@ -5,6 +5,7 @@ import Coordinates.Coord2d;
 import Coordinates.Coord3d;
 import Figures.Dot.Dot2d;
 import Figures.Line.Line3d;
+import Figures.Rectangle.Rectangle2d;
 import Figures.Triangle.Triangle2d;
 import Figures.Triangle.Triangle3d;
 import org.lwjgl.*;
@@ -113,7 +114,7 @@ public class HelloWorld {
 
         // Set the clear color
         glClearColor(0.0f, 0.0f, 0.0f, 0.0f);
-        glClearDepth(100.0f);
+        glClearDepth(500);
         GL11.glEnable(GL_DEPTH_TEST);
         GL11.glDepthFunc(GL_LEQUAL);
         GL11.glShadeModel(GL_SMOOTH);
@@ -126,80 +127,26 @@ public class HelloWorld {
 
         Coord2d A = new Coord2d(-50, -50);
         Coord2d B = new Coord2d(50, -50);
-        Coord2d C = new Coord2d(0, 50);
-        Color color = new Color(255, 0, 0);
-        Triangle2d triangle = new Triangle2d(A, B, C);
-        triangle.setColorA(color);
-        triangle.setColorB(color);
-        triangle.setColorC(color);
+        Coord2d C = new Coord2d(50, 50);
+        Coord2d D = new Coord2d(-50, 50);
+
+        Color color = new Color(255, 255, 255);
 
 
+        Rectangle2d rectangle = new Rectangle2d(A, B, C, D);
+        rectangle.setColorA(color);
+        rectangle.setColorB(color);
+        rectangle.setColorC(color);
+        rectangle.setColorD(color);
+//        rectangle.setTexture(texture, loader.getBufferedImage(), loader.getBuffer());
 
         // Run the rendering loop until the user has attempted to close
         // the window or has pressed the ESCAPE key.
-        glScalef(100,100,100);
         while (!glfwWindowShouldClose(window)) {
             glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT); // clear the framebuffer
 
 
-
-            glBindTexture(GL_TEXTURE_2D, texture);
-
-            glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL12.GL_CLAMP_TO_EDGE);
-            glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL12.GL_CLAMP_TO_EDGE);
-
-            glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
-            glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
-
-            glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA8, loader.getBufferedImage().getWidth(),
-                    loader.getBufferedImage().getHeight(), 0, GL_RGBA, GL_UNSIGNED_BYTE, loader.getBuffer());
-
-
-            glBegin(GL11.GL_QUADS);
-
-            // Front Face
-            glTexCoord2f(0.0f, 0.0f); glVertex3f(-1.0f, -1.0f, 1.0f);
-            glTexCoord2f(1.0f, 0.0f); glVertex3f( 1.0f, -1.0f, 1.0f);
-            glTexCoord2f(1.0f, 1.0f); glVertex3f( 1.0f, 1.0f, 1.0f);
-            glTexCoord2f(0.0f, 1.0f); glVertex3f(-1.0f, 1.0f, 1.0f);
-
-            // Back Face
-            glTexCoord2f(1.0f, 0.0f); glVertex3f(-1.0f, -1.0f, -1.0f);
-            glTexCoord2f(1.0f, 1.0f); glVertex3f(-1.0f, 1.0f, -1.0f);
-            glTexCoord2f(0.0f, 1.0f); glVertex3f( 1.0f, 1.0f, -1.0f);
-            glTexCoord2f(0.0f, 0.0f); glVertex3f( 1.0f, -1.0f, -1.0f);
-
-            // Top Face
-            glTexCoord2f(0.0f, 1.0f); glVertex3f(-1.0f, 1.0f, -1.0f);
-            glTexCoord2f(0.0f, 0.0f); glVertex3f(-1.0f, 1.0f, 1.0f);
-            glTexCoord2f(1.0f, 0.0f); glVertex3f( 1.0f, 1.0f, 1.0f);
-            glTexCoord2f(1.0f, 1.0f); glVertex3f( 1.0f, 1.0f, -1.0f);
-
-            // Bottom Face
-            glTexCoord2f(1.0f, 1.0f); glVertex3f(-1.0f, -1.0f, -1.0f);
-            glTexCoord2f(0.0f, 1.0f); glVertex3f( 1.0f, -1.0f, -1.0f);
-            glTexCoord2f(0.0f, 0.0f); glVertex3f( 1.0f, -1.0f, 1.0f);
-            glTexCoord2f(1.0f, 0.0f); glVertex3f(-1.0f, -1.0f, 1.0f);
-
-            // Right face
-            glTexCoord2f(1.0f, 0.0f); glVertex3f( 1.0f, -1.0f, -1.0f);
-            glTexCoord2f(1.0f, 1.0f); glVertex3f( 1.0f, 1.0f, -1.0f);
-            glTexCoord2f(0.0f, 1.0f); glVertex3f( 1.0f, 1.0f, 1.0f);
-            glTexCoord2f(0.0f, 0.0f); glVertex3f( 1.0f, -1.0f, 1.0f);
-
-            // Left Face
-            glTexCoord2f(0.0f, 0.0f); glVertex3f(-1.0f, -1.0f, -1.0f);
-            glTexCoord2f(1.0f, 0.0f); glVertex3f(-1.0f, -1.0f, 1.0f);
-            glTexCoord2f(1.0f, 1.0f); glVertex3f(-1.0f, 1.0f, 1.0f);
-            glTexCoord2f(0.0f, 1.0f); glVertex3f(-1.0f, 1.0f, -1.0f);
-
-            glEnd();
-            glFlush();
-
-            glRotatef(2,1,1,0);
-
-
-
+            rectangle.draw();
 
 
             glfwSwapBuffers(window); // swap the color buffers
